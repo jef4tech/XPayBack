@@ -9,6 +9,7 @@
       android:visibility="gone"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
@@ -39,7 +40,8 @@
           app:layout_constraintEnd_toEndOf="@+id/iv_user"
           app:layout_constraintStart_toStartOf="@+id/iv_user"
           app:layout_constraintTop_toBottomOf="@+id/iv_user" />
-    </androidx.constraintlayout.widget.ConstraintLayout>    <TextView
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
         android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -219,7 +221,6 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/tv_firstName"
         app:layout_constraintTop_toBottomOf="@+id/tv_gender" />
-
 
     <ProgressBar
         android:id="@+id/progressBar"
