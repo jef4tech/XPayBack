@@ -28,6 +28,7 @@ class UserAdapter(private val listener: (userId: Int) -> Unit): PagingDataAdapte
 
             val user = getItem(position)
             holder.custombind.apply {
+                tvId.text = "ID: "+user?.id
                 tvUserName.text = "UserName: " + user?.username
                 tvEmail.text = "Email : " + user?.email
                 tvMaiden.text = "Maiden Name: " + user?.maidenName

@@ -17,18 +17,20 @@ class PostDataSource(private val retrofitClientFactory: RetrofitClientFactory):
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UsersResponse.User> {
         try {
-            val currentLoadingPageKey = params.key ?: 10
-            val response = retrofitClientFactory.restApis.getAllUser(10,currentLoadingPageKey)
+            val currentLoadingPageKey = params.key ?: 0
+            val response = retrofitClientFactory.restApis.getAllUser(PAGE_SIZE,
+                currentLoadingPageKey* PAGE_SIZE)
             val responseData = mutableListOf<UsersResponse.User>()
             val data = response.body()?.users ?: emptyList()
             responseData.addAll(data)
 
-//            val prevKey = null
+            val prevKey = if (currentLoadingPageKey == 0) null else currentLoadingPageKey - 1
+            val nextKey = if (data.isEmpty()) null else currentLoadingPageKey + 1
 
             return LoadResult.Page(
                 data = responseData,
-                prevKey = null,
-                nextKey = currentLoadingPageKey.plus(10)
+                prevKey = prevKey,
+                nextKey = nextKey
             )
         } catch (e: Exception) {
             return LoadResult.Error(e)
@@ -39,5 +41,7 @@ class PostDataSource(private val retrofitClientFactory: RetrofitClientFactory):
         return null
     }
 
-
+    companion object {
+        const val PAGE_SIZE = 10
+    }
 }
